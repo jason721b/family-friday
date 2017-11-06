@@ -36,3 +36,7 @@ class Member(DocType):
         for member in scan(es, index='member', size=10):
             yield Member(**member['_source'])
 
+    @property
+    def name(self):
+        return '{} {}'.format(self.first_name, self.last_name)
+

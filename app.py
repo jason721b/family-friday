@@ -7,6 +7,7 @@ import logging
 from flask import Flask
 from flask import render_template
 from members import Member
+from random_group import random_group
 
 app = Flask(__name__)
 
@@ -24,9 +25,11 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/random_group')
-def random_group():
-    return render_template('random_group.html')
+@app.route('/lunch_time')
+def lunch_time():
+    # NOTE: There may be a performance issue if there are millions of members
+    all_members = list(Member.all())
+    return render_template('lunch_time.html', groups=random_group(all_members))
 
 
 @app.route('/users/new')
@@ -43,3 +46,7 @@ def create_user():
 def list_user():
     return render_template('list_users.html', members=Member.all())
 
+
+@app.context_processor
+def inject_helpers():
+    return dict(enumerate=enumerate)

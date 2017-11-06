@@ -1,0 +1,14 @@
+<h1>Lunch Time</h1>
+
+<ul>
+    {% for i, group in enumerate(groups, 1) %}
+        <li>
+            Group {{ i }}
+            <ul>
+                {% for member in group %}
+                    <li>{{ member.name }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
