@@ -1,9 +1,13 @@
-<h1>List All Team Members</h1>
+{% extends 'base.html' %}
 
-<a href="{{ url_for('index') }}">Back</a>
+{% block content %}
+    <h1>List All Team Members</h1>
 
-<ol>
-    {% for member in members %}
-        <li>{{ member.name }}</li>
-    {% endfor %}
-</ol>
+    <a href="{{ url_for('index') }}">Back</a>
+
+    <ol>
+        {% for member in members %}
+            <li>{{ member.name }}</li>
+        {% endfor %}
+    </ol>
+{% endblock %}
