@@ -1,13 +1,29 @@
 {% extends 'base.html' %}
 
+{% block header %}
+    {# TODO: Move to a CSS file #}
+    <style>
+        .member {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    <h1>List All Team Members</h1>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h1>List All Team Members</h1>
+            <a href="{{ url_for('index') }}">Back</a>
+        </div>
+    </div>
 
-    <a href="{{ url_for('index') }}">Back</a>
-
-    <ol>
-        {% for member in members %}
-            <li>{{ member.name }}</li>
-        {% endfor %}
-    </ol>
+    <div class="row mt-4">
+            {% for i, member in enumerate(members, 1) %}
+                <div class="member col-md-4 col-sm-6">
+                    {{ i }}. {{ member.name }}
+                </div>
+            {% endfor %}
+    </div>
 {% endblock %}
