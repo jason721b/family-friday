@@ -43,11 +43,11 @@ def new_member():
 
 @app.route('/members/create', methods=['POST'])
 def create_member():
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
+    first_name = request.form.get('first_name', '')
+    last_name = request.form.get('last_name', '')
 
     if not first_name or not last_name:
-        flash('Both first name and last name need to be specified', 'error')
+        flash('Both first name and last name need to be specified', 'danger')
         return render_template('new_member.html', first_name=first_name, last_name=last_name)
 
     member = Member(first_name=first_name.strip(), last_name=last_name.strip())
@@ -55,7 +55,7 @@ def create_member():
         member.save()
         flash('Created new team member %s' % member.name, 'success')
     except Exception:
-        flash('Failed to create new team member %s' % member.name, 'error')
+        flash('Failed to create new team member %s' % member.name, 'danger')
     return redirect(url_for('new_member'))
 
 
