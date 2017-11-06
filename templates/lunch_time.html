@@ -1,20 +1,33 @@
 {% extends 'base.html' %}
 
+{% block title %}Lunch Time{% endblock %}
+
 {% block content %}
-    <h1>Lunch Time</h1>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h1>Lunch Time</h1>
+            <p>
+                Refresh the page to generate a new random group
+            </p>
+        </div>
+    </div>
 
     <a href="{{ url_for('index') }}">Back</a>
 
-    <ul>
+    <div class="row mt-2">
         {% for i, group in enumerate(groups, 1) %}
-            <li>
-                Group {{ i }}
-                <ul>
-                    {% for member in group %}
-                        <li>{{ member.name }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
+            <div class="col-md-4 col-sm-6">
+                <div class="card my-2">
+                    <div class="card-block">
+                        <h5 class="card-title">Group {{ i }}</h5>
+                        <div class="card-text">
+                            {% for member in group %}
+                                <li>{{ member.name }}</li>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
