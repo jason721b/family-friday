@@ -16,18 +16,9 @@
 </head>
 
 <body>
-    <div id="content" class="container {{ 'debug' if debug else '' }}">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        <div style="margin-left:30px;">{{ message }}</div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-    </div>
-    {% block footer %}{% endblock %}
+<div id="content" class="container">
+    {% block content %}{% endblock %}
+</div>
+{% block footer %}{% endblock %}
 </body>
 </html>

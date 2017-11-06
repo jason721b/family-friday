@@ -1,15 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 import logging
+import sys
 
-from flask import Flask
-from flask import render_template
+from flask import Flask, url_for
+from flask import render_template, request, redirect, flash
+
 from members import Member
 from random_group import random_group
 
 app = Flask(__name__)
+
+# TODO: Specify secret_key via env variable
+app.secret_key = '28cfe91e907f'
 
 logging.basicConfig(level=logging.INFO, stream=sys.stderr,
                     format='%(asctime)s [%(name)s] %(levelname)s: %(message)s')
@@ -39,7 +43,20 @@ def new_member():
 
 @app.route('/members/create', methods=['POST'])
 def create_member():
-    return 'Create New Member'
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+
+    if not first_name or not last_name:
+        flash('Both first name and last name need to be specified', 'error')
+        return render_template('new_member.html', first_name=first_name, last_name=last_name)
+
+    member = Member(first_name=first_name.strip(), last_name=last_name.strip())
+    try:
+        member.save()
+        flash('Created new team member %s' % member.name, 'success')
+    except Exception:
+        flash('Failed to create new team member %s' % member.name, 'error')
+    return redirect(url_for('new_member'))
 
 
 @app.route('/members/')
