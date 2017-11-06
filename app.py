@@ -32,19 +32,19 @@ def lunch_time():
     return render_template('lunch_time.html', groups=random_group(all_members))
 
 
-@app.route('/users/new')
+@app.route('/members/new')
 def new_user():
-    return render_template('new_user.html')
+    return render_template('new_member.html')
 
 
-@app.route('/users/create', methods=['POST'])
+@app.route('/members/create', methods=['POST'])
 def create_user():
-    return 'Create New Users'
+    return 'Create New Member'
 
 
-@app.route('/users/')
+@app.route('/members/')
 def list_user():
-    return render_template('list_users.html', members=Member.all())
+    return render_template('list_members.html', members=Member.all())
 
 
 @app.context_processor
