@@ -1,0 +1,7 @@
+<h1>List All Team Members</h1>
+
+<ol>
+    {% for member in members %}
+        <li>{{ member.first_name }} {{ member.last_name }}</li>
+    {% endfor %}
+</ol>
