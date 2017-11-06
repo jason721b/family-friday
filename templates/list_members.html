@@ -1,5 +1,7 @@
 <h1>List All Team Members</h1>
 
+<a href="{{ url_for('index') }}">Back</a>
+
 <ol>
     {% for member in members %}
         <li>{{ member.name }}</li>

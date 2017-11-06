@@ -3,5 +3,12 @@
 {% block title %}Family Friday{% endblock %}
 
 {% block content %}
-    <h1>Ha</h1>
+    <h1>Family Friday</h1>
+
+    <ul>
+        <li><a href="{{ url_for('new_member') }}">Add New Team Member</a></li>
+        <li><a href="{{ url_for('list_members') }}">List All Team Members</a></li>
+        <li><a href="{{ url_for('lunch_time') }}">Lunch Time</a></li>
+    </ul>
+
 {% endblock %}
