@@ -33,17 +33,17 @@ def lunch_time():
 
 
 @app.route('/members/new')
-def new_user():
+def new_member():
     return render_template('new_member.html')
 
 
 @app.route('/members/create', methods=['POST'])
-def create_user():
+def create_member():
     return 'Create New Member'
 
 
 @app.route('/members/')
-def list_user():
+def list_members():
     return render_template('list_members.html', members=Member.all())
 
 
