@@ -6,13 +6,20 @@
     <div class="row mt-4">
         <div class="col-md-12">
             <h1>Lunch Time</h1>
-            <p>
-                Refresh the page to generate a new random group
-            </p>
+            <p>You can click <b>Refresh</b> button to generate new random groups.
+                Optional, if you can specify the random seed - the same random seed always yield the same grouping</p>
+        </div>
+        <div class="col-md-12">
+            <form class='mt-1 form-inline' action="{{ url_for('lunch_time') }}">
+                <input type="submit" value="Refresh" class="btn btn-primary mr-2">
+                <label class='mr-2' for="seed">with Seed</label>
+                <input class="form-control mb-2 mr-sm-2 mb-sm-0" name='seed' id="seed"
+                       placeholder="Seed (Optional)" value="{{ seed }}">
+                <a href="{{ url_for('index') }}">Back</a>
+            </form>
         </div>
     </div>
 
-    <a href="{{ url_for('index') }}">Back</a>
 
     <div class="row mt-2">
         {% for i, group in enumerate(groups, 1) %}
