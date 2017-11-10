@@ -2,18 +2,21 @@ import random
 
 
 # TODO: How to specify seed
-def random_group(members):
+def random_group(members, seed=None):
     """
 
     Parameters
     ----------
     members: list<any>
+    seed: hashable
 
     Returns
     -------
     list<list<any>>
 
     """
+
+    random.seed(seed)
 
     # If there are less than GROUP_MAX_SIZE (which is 5) people, just get one table
     if len(members) <= 5:
