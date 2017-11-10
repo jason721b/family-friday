@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import random
 import sys
 
 from flask import Flask, url_for
@@ -23,6 +24,7 @@ logger = logging.getLogger(__name__)
 #    Elasticsearch index can be treated as table in SQL database
 Member.init()
 
+# TODO: Add exception handling and return 5xx page if needed
 
 @app.route('/')
 def index():
@@ -31,9 +33,14 @@ def index():
 
 @app.route('/lunch_time')
 def lunch_time():
+    # seed should be None if it's not specified or an empty string
+    seed = request.args.get('seed') or None
+
     # NOTE: There may be a performance issue if there are millions of members
     all_members = list(Member.all())
-    return render_template('lunch_time.html', groups=random_group(all_members))
+    return render_template('lunch_time.html',
+                           groups=random_group(all_members, seed=seed),
+                           seed=seed if seed else '')
 
 
 @app.route('/members/new')
